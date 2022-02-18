@@ -1,3 +1,7 @@
+<?php
+//include auth_session.php file on all user panel pages
+include("auth_session.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +48,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#job">Apply</a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="profile.php"> <?php echo $_SESSION['username']; ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">Logout</a>
+                        </li>
                     </ul>
                 </div>
             </nav>

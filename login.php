@@ -43,7 +43,41 @@
     </style>
   </head>
   <body>
-    
+
+
+  <?php
+    require('dp.php');
+    session_start();
+    // When form submitted, check and create user session.
+    if (isset($_POST['username'])) {
+        $username = stripslashes($_REQUEST['username']);    // removes backslashes
+        $username = mysqli_real_escape_string($con, $username);
+
+        $password = stripslashes($_REQUEST['password']);
+        $password = mysqli_real_escape_string($con, $password);
+
+        $email    = stripslashes($_REQUEST['email']);
+        $email    = mysqli_real_escape_string($con, $email);
+
+
+        // Check user is exist in the database
+        $query    = "SELECT * FROM `users` WHERE email='$email' AND username='$username'
+                     AND password='" . md5($password) . "'";
+        $result = mysqli_query($con, $query) or die(mysql_error());
+        $rows = mysqli_num_rows($result);
+
+        if ($rows == 1) {
+            $_SESSION['username'] = $username;
+            // Redirect to user dashboard page
+            header("Location: dashboard.php");
+        } else {
+            echo ("<script LANGUAGE='JavaScript'>
+            window.alert('Incorrect username or password or email');
+            window.location.href='login.php';
+            </script>");
+        }
+    } else {
+?>
     <section class="form my-5">
         <div class="container">
             <div class="row no-gutters">
@@ -54,7 +88,12 @@
 
                     <h1 class="font-weight-bold py-3">LOGEIN</h1>
                     <h4>Sign In Into Your Account</h4>
-                    <form action="">
+                    <form action="" method="post">
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <input type="text" name="username" id="username" class="form-control my-3 p-2" placeholder="User Name"Required>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="col-lg-7">
                                 <input type="email" name="email" id="email" class="form-control my-3 p-2" placeholder="Email-Adress"Required>
@@ -76,6 +115,10 @@
             </div>
         </div>
     </section>
+
+    <?php
+    }
+?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
