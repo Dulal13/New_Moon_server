@@ -71,6 +71,7 @@
 
         if ($rows == 1) {
             $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
             // Redirect to user dashboard page
             header("Location: dashboard.php");
         } else {
