@@ -43,7 +43,7 @@ include("auth_session.php");
                             <a class="nav-link" href="#team">Team</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="course.html">Course</a>
+                            <a class="nav-link" href="course.php">Course</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#job">Apply</a>
@@ -148,7 +148,7 @@ include("auth_session.php");
         <div class="row">
             <div class="col-md-6 col-sm-12" style="padding: 50px;">
                 <h2>Find Your New Dream Job with <span style="color:tomato; font-weight: bold;">New Moon</span></h2>
-                <button class="btn btn-success mt-3"><a href="job.html">Apply Now</a></button>
+                <button class="btn btn-success mt-3"><a href="job.php">Apply Now</a></button>
             </div>
 
             <div class="col-md-6 col-sm-12">

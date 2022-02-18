@@ -1,3 +1,8 @@
+<?php
+//include auth_session.php file on all user panel pages
+include("auth_session.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +20,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h5>Explore Course By Category</h5>
+        <h5>Explore Course By Category.Let's your choice <?php echo $_SESSION['username']; ?></h5>
     </div>
     <div class="container mt-5 mb-5">
         <div class="row">
