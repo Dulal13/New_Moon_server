@@ -8,7 +8,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Login</title>
+    
+     <!-- favicon -->
+     <link rel="shortcut icon" href="images/new_moon.png" type="image/x-icon">
+     
+    <title>Forgot Password</title>
     <style>
         *{
             padding:0;
@@ -52,12 +56,12 @@
                 </div>
                 <div class="col-lg-7 px-5 pt-5">
 
-                    <h1 class="font-weight-bold py-3">OTP</h1>
-                    <h4>Enter Your OTP code</h4>
+                    <h1 class="font-weight-bold py-3">Forgot Password</h1>
+                    <h4>Enter Your Email</h4>
                     <form action="">
                         <div class="form-row">
                             <div class="col-lg-7">
-                                <input type="password" name="password" id="password" class="form-control my-3 p-2" placeholder="Code"Required>
+                                <input type="email" name="email" id="email" class="form-control my-3 p-2" placeholder="Email-Address"Required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -70,8 +74,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Optional JavaScript -->
+ <!-- Optional JavaScript --> -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

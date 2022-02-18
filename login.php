@@ -117,6 +117,7 @@
                             </div>
                         </div>
                         <p>Don't have an account? <a href="registration.php">Register Now</a></p>
+                        <p>Forgot password? <a href="forgot.php">Click here</a></p>
                     </form>
                 </div>
             </div>
