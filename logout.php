@@ -2,7 +2,7 @@
     session_start();
     // Destroy session
     if(session_destroy()) {
-        // Redirecting To Home Page
+        // Redirecting To login Page
         header("Location: login.php");
     }
 ?>

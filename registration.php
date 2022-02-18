@@ -8,6 +8,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+     <!-- favicon -->
+     <link rel="shortcut icon" href="images/new_moon.png" type="image/x-icon">
+     
     <title>Registration</title>
     <style>
         *{
@@ -48,6 +51,7 @@
     session_start();
     require('dp.php');
     
+
     if(! $_SESSION['username']){
     if (isset($_REQUEST['username'])) {
         
@@ -65,22 +69,6 @@
 
         $create_datetime = date("Y-m-d H:i:s");
 
-       
-    //     if( $password ==  $cpassword){
-    //     $query    = "INSERT into users(username, password, email, create_datetime)
-    //     VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime')";
-    //     $result   = mysqli_query($con, $query); 
-    //     if ($result) {
-    //         header("Location: login.php");
-    //     }
-    //     } else {
-    //         // echo '<script>alert("password not match")</script>';
-    //         // header("Location: registration.php");
-    //         echo ("<script LANGUAGE='JavaScript'>
-    // window.alert('Password Not Match');
-    // window.location.href='registration.php';
-    // </script>");
-        // }
 
         if( $password ==  $cpassword){
             $select = mysqli_query($con, "SELECT `email` FROM `users` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($con));

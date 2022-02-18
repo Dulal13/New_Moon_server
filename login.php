@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- favicon -->
+    <link rel="shortcut icon" href="images/new_moon.png" type="image/x-icon">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -48,12 +51,10 @@
   <?php
     require('dp.php');
     session_start();
-    // When form submitted, check and create user session.
-
 
     if(! $_SESSION['username']){
     if (isset($_POST['username'])) {
-        $username = stripslashes($_REQUEST['username']);    // removes backslashes
+        $username = stripslashes($_REQUEST['username']);    
         $username = mysqli_real_escape_string($con, $username);
 
         $password = stripslashes($_REQUEST['password']);
