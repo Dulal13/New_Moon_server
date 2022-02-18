@@ -48,8 +48,12 @@
   <body>
 
   <?php
-    session_start();
+
+    error_reporting(0);
+    // session_start();
     require('dp.php');
+    
+    session_start();
     
 
     if(! $_SESSION['username']){

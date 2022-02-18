@@ -49,6 +49,8 @@
 
 
   <?php
+
+    error_reporting(0);
     require('dp.php');
     session_start();
 
