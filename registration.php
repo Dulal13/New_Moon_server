@@ -48,7 +48,7 @@
     session_start();
     require('dp.php');
     
-
+    if(! $_SESSION['username']){
     if (isset($_REQUEST['username'])) {
         
         $username = stripslashes($_REQUEST['username']);
@@ -156,6 +156,9 @@
     </section>
 
     <?php
+    }}
+    else{
+        header("Location: dashboard.php");
     }
 ?>
 

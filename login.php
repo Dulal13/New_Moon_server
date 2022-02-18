@@ -50,7 +50,8 @@
     session_start();
     // When form submitted, check and create user session.
 
- 
+
+    if(! $_SESSION['username']){
     if (isset($_POST['username'])) {
         $username = stripslashes($_REQUEST['username']);    // removes backslashes
         $username = mysqli_real_escape_string($con, $username);
@@ -119,6 +120,9 @@
     </section>
 
     <?php
+    }}
+    else{
+        header("Location: dashboard.php");
     }
 ?>
 
