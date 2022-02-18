@@ -130,7 +130,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-lg-7">
-                                <input type="email" name="email" id="email" class="form-control my-3 p-2" placeholder="Email-Adress"Required>
+                                <input type="email" name="email" id="email" class="form-control my-3 p-2" placeholder="Email-Address"Required>
                             </div>
                         </div>
                         <div class="form-row">
