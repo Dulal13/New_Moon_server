@@ -67,7 +67,7 @@
 
 
         // Check user is exist in the database
-        $query    = "SELECT * FROM `users` WHERE email='$email' AND username='$username'
+        $query    = "SELECT * FROM `users` WHERE is_verified = '1' AND email='$email' AND username='$username'
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($con, $query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
@@ -79,7 +79,7 @@
             header("Location: dashboard.php");
         } else {
             echo ("<script LANGUAGE='JavaScript'>
-            window.alert('Incorrect username or password or email');
+            window.alert('Incorrect username or password or email or not verified');
             window.location.href='login.php';
             </script>");
         }

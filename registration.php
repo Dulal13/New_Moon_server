@@ -54,6 +54,49 @@
     require('dp.php');
     
     session_start();
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    function sendMail($email, $v_code)
+    {
+        require ('PHPMailer/PHPMailer.php');
+        require ('PHPMailer/SMTP.php');
+        require ('PHPMailer/Exception.php');
+
+        $mail = new PHPMailer(true);
+
+        try {
+                               
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'dulalmiahcity@gmail.com';                     //SMTP username
+            $mail->Password   = 'dulal18349';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            //Recipients
+            $mail->setFrom('dulalmiahcity@gmail.com', 'New Moon');
+            $mail->addAddress($email);     //Add a recipient
+            
+        
+          
+        
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Email Verification From New Moon';
+            $mail->Body    = "Thanks for Registration.Click the link for verify email address
+                            <a href='http://localhost/final_project/verify.php?email=$email&v_code=$v_code'>Verify</a>";
+          
+        
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+           return false;
+        }
+
+    }
     
 
     if(! $_SESSION['username']){
@@ -71,6 +114,7 @@
         $cpassword = stripslashes($_REQUEST['cpassword']);
         $cpassword = mysqli_real_escape_string($con, $cpassword);
 
+
         $create_datetime = date("Y-m-d H:i:s");
 
 
@@ -85,17 +129,18 @@
                    
                }
             else{
-                $query    = "INSERT into users(username, password, email, create_datetime)
-                 VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime')";
+                $v_code = bin2hex(random_bytes(16));
+                $query    = "INSERT into users(username, password, email, create_datetime , verification_code ,is_verified)
+                 VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime' , '$v_code','0')";
                  $result   = mysqli_query($con, $query); 
-                 if ($result) {
+                 if ($result && sendMail($email , $v_code)) {
                     header("Location: login.php");
                  }
             }
         }
         else{
             echo ("<script LANGUAGE='JavaScript'>
-            window.alert('Password not match');
+            window.alert('Password not match or server not work');
             window.location.href='registration.php';
             </script>");
         }
