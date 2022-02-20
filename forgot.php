@@ -1,3 +1,10 @@
+<?php
+  require('dp.php');
+?>
+
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -58,10 +65,15 @@
 
                     <h1 class="font-weight-bold py-3">Forgot Password</h1>
                     <h4>Enter Your Email</h4>
-                    <form action="">
+                    <form action="" method="POST">
                         <div class="form-row">
                             <div class="col-lg-7">
                                 <input type="email" name="email" id="email" class="form-control my-3 p-2" placeholder="Email-Address"Required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <input type="password" name="password" id="password" class="form-control my-3 p-2" placeholder="New Password"Required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -73,7 +85,39 @@
                 </div>
             </div>
         </div>
+
+
+
     </section>
+
+    <?php
+
+    if(isset($_POST['submit']))
+    {
+       
+
+        if( mysqli_query($con ,  "UPDATE users SET password= '$_POST[password]' WHERE email = '$_POST[email]'")){
+
+            echo ("<script LANGUAGE='JavaScript'>
+            window.alert('Password Update successfully');
+            window.location.href='login.php';
+            </script>");
+        }
+        else{
+            echo ("<script LANGUAGE='JavaScript'>
+            window.alert('Don't find your email');
+            window.location.href='login.php';
+            </script>");
+        }
+
+
+    }
+?>
+
+
+
+
+
  <!-- Optional JavaScript --> -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
