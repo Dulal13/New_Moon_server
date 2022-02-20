@@ -11,6 +11,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <!-- title -->
     <title>Login</title>
     <style>
         *{
@@ -55,7 +56,8 @@
     session_start();
 
     if(! $_SESSION['username']){
-    if (isset($_POST['username'])) {
+    if (isset($_POST['submit'])) {
+
         $username = stripslashes($_REQUEST['username']);    
         $username = mysqli_real_escape_string($con, $username);
 
@@ -69,12 +71,13 @@
         // Check user is exist in the database
         $query    = "SELECT * FROM `users` WHERE is_verified = '1' AND email='$email' AND username='$username'
                      AND password='" . md5($password) . "'";
+                     
         $result = mysqli_query($con, $query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
 
         if ($rows == 1) {
             $_SESSION['username'] = $username;
-            $_SESSION['email'] = $email;
+
             // Redirect to user dashboard page
             header("Location: dashboard.php");
         } else {

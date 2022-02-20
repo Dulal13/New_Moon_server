@@ -11,7 +11,10 @@
      <!-- favicon -->
      <link rel="shortcut icon" href="images/new_moon.png" type="image/x-icon">
      
+     <!-- title -->
     <title>Registration</title>
+
+    <!-- Internal css -->
     <style>
         *{
             padding:0;
@@ -44,16 +47,19 @@
             font-weight:bold;
         }
     </style>
+
   </head>
   <body>
 
   <?php
 
+    //insert
     error_reporting(0);
-    // session_start();
     require('dp.php');
-    
     session_start();
+
+
+    // library
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
@@ -68,23 +74,23 @@
 
         try {
                                
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'dulalmiahcity@gmail.com';                     //SMTP username
-            $mail->Password   = 'dulal18349';                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->isSMTP();                                           
+            $mail->Host       = 'smtp.gmail.com';                     
+            $mail->SMTPAuth   = true;                                   
+            $mail->Username   = 'dulalmiahcity@gmail.com';                    
+            $mail->Password   = 'dulal18349';                               
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
+            $mail->Port       = 465;                                    
         
-            //Recipients
+            
             $mail->setFrom('dulalmiahcity@gmail.com', 'New Moon');
-            $mail->addAddress($email);     //Add a recipient
+            $mail->addAddress($email);    
             
         
           
         
             //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->isHTML(true);                                 
             $mail->Subject = 'Email Verification From New Moon';
             $mail->Body    = "Thanks for Registration.Click the link for verify email address
                             <a href='http://localhost/final_project/verify.php?email=$email&v_code=$v_code'>Verify</a>";
@@ -92,7 +98,9 @@
         
             $mail->send();
             return true;
+
         } catch (Exception $e) {
+
            return false;
         }
 
@@ -100,8 +108,10 @@
     
 
     if(! $_SESSION['username']){
-    if (isset($_REQUEST['username'])) {
+
+    if (isset($_REQUEST['submit'])) {
         
+        //remove backslah and special char
         $username = stripslashes($_REQUEST['username']);
         $username = mysqli_real_escape_string($con, $username);
 
@@ -119,7 +129,10 @@
 
 
         if( $password ==  $cpassword){
+            //check email is already used or not
+
             $select = mysqli_query($con, "SELECT `email` FROM `users` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($con));
+
             if(mysqli_num_rows($select)) {
 
                 echo ("<script LANGUAGE='JavaScript'>
@@ -129,10 +142,13 @@
                    
                }
             else{
+
                 $v_code = bin2hex(random_bytes(16));
-                $query    = "INSERT into users(username, password, email, create_datetime , verification_code ,is_verified)
+
+                 $query    = "INSERT into users(username, password, email, create_datetime , verification_code ,is_verified)
                  VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime' , '$v_code','0')";
                  $result   = mysqli_query($con, $query); 
+                 
                  if ($result && sendMail($email , $v_code)) {
                     header("Location: login.php");
                  }

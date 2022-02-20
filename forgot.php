@@ -82,9 +82,11 @@
                             </div>
                         </div>
                     </form>
+                    <p> Have you an account? <a href="login.php">Login</a></p>
                 </div>
             </div>
         </div>
+     
 
 
 
@@ -97,18 +99,17 @@
         $password = stripslashes($_POST['password']);
         $password = mysqli_real_escape_string($con, $password);
 
-        if( mysqli_query($con ,  "UPDATE users SET password= '" . md5($password) . "' WHERE email = '$_POST[email]'")){
+        $select = mysqli_query($con, "SELECT `email` FROM `users` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($con));
 
-            echo ("<script LANGUAGE='JavaScript'>
-            window.alert('Password Update successfully');
-            window.location.href='login.php';
-            </script>");
-        }
-        else{
-            echo ("<script LANGUAGE='JavaScript'>
-            window.alert('Don't find your email');
-            window.location.href='login.php';
-            </script>");
+        if(mysqli_num_rows($select))
+        {
+            if( mysqli_query($con ,  "UPDATE users SET password= '" . md5($password) . "' WHERE email = '$_POST[email]'")){
+
+                echo ("<script LANGUAGE='JavaScript'>
+                window.alert('Password Update successfully');
+                window.location.href='login.php';
+                </script>");
+            }
         }
 
 
