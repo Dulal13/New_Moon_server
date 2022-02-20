@@ -94,9 +94,10 @@
 
     if(isset($_POST['submit']))
     {
-       
+        $password = stripslashes($_POST['password']);
+        $password = mysqli_real_escape_string($con, $password);
 
-        if( mysqli_query($con ,  "UPDATE users SET password= '$_POST[password]' WHERE email = '$_POST[email]'")){
+        if( mysqli_query($con ,  "UPDATE users SET password= '" . md5($password) . "' WHERE email = '$_POST[email]'")){
 
             echo ("<script LANGUAGE='JavaScript'>
             window.alert('Password Update successfully');
